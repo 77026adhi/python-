@@ -19,3 +19,158 @@ nums = [2, 7, 11, 15]
 target = 9
 result = twoSum(nums, target)
 print(result)
+<aside>
+💡 **Q2.** Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+- Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+- Return k.
+def removeElement(nums, val):
+    k = 0  # Count of elements not equal to val
+    for i in range(len(nums)):
+        if nums[i] != val:
+            nums[k] = nums[i]
+            k += 1
+    return k
+
+# Example usage
+nums = [3, 2, 2, 3]
+val = 3
+k = removeElement(nums, val)
+print(k)  # Output: 2
+print(nums)  # Output: [2, 2, _, _]
+<aside>
+💡 **Q3.** Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You must write an algorithm with O(log n) runtime complexity
+def searchInsert(nums, target):
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return left  # Target not found, return the index where it would be inserted
+
+# Example usage
+nums = [1, 3, 5, 6]
+target = 5
+index = searchInsert(nums, target)
+print(index)  # Output: 2
+<aside>
+💡 **Q4.** You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+Increment the large integer by one and return the resulting array of digits.
+def plusOne(digits):
+    carry = 1  # Start with a carry of 1
+    n = len(digits)
+
+    for i in range(n - 1, -1, -1):
+        digits[i] += carry
+        carry = digits[i] // 10
+        digits[i] %= 10
+
+        if carry == 0:
+            break
+
+    if carry == 1:
+        digits.insert(0, 1)
+
+    return digits
+
+# Example usage
+digits = [9, 9, 9]
+result = plusOne(digits)
+print(result)  # Output: [1, 0, 0, 0]
+<aside>
+💡 **Q5.** You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+</aside>def merge(nums1, m, nums2, n):
+    p1 = m - 1
+    p2 = n - 1
+    p = m + n - 1
+
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] > nums2[p2]:
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        p -= 1
+
+    if p2 >= 0:
+        nums1[:p2 + 1] = nums2[:p2 + 1]
+
+# Example usage
+nums1 = [1, 2, 3, 0, 0, 0]
+m = 3
+nums2 = [2, 5, 6]
+n = 3
+merge(nums1, m, nums2, n)
+print(nums1)  # Output: [1, 2, 2, 3, 5, 6]
+Q6. Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct
+def containsDuplicate(nums):
+    num_set = set()
+    for num in nums:
+        if num in num_set:
+            return True
+        num_set.add(num)
+    return False
+Q7. Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the nonzero elements.
+def moveZeroes(nums):
+    zero_index = 0  # Pointer to track the index where non-zero elements can be placed
+
+    # Traverse the array
+    for i in range(len(nums)):<aside>
+        if nums[i] != 0:
+            # Swap non-zero element with the current zero_index
+            nums[i], nums[zero_index] = nums[zero_index], nums[i]
+            zero_index += 1
+<aside>
+💡 **Q8.** You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+
+You are given an integer array nums representing the data status of this set after the error.
+
+Find the number that occurs twice and the number that is missing and return them in the form of an array.
+
+</aside>
+    return nums
+def findErrorNums(nums):
+    n = len(nums)
+    num_set = set()
+    duplicate = -1
+
+    # Find the duplicate number
+    for num in nums:
+        if num in num_set:
+            duplicate = num
+        else:
+            num_set.add(num)
+
+    # Find the missing number
+    for i in range(1, n+1):
+        if i not in num_set:
+            missing = i
+            break
+
+    return [duplicate, missing]
+
+
+</aside>
+
+</aside>
+
+</aside>
