@@ -1,0 +1,223 @@
+Q1. How can you create a Bokeh plot using Python code?
+To create a Bokeh plot using Python code, you need to follow these steps:
+
+1.Import the necessary libraries: First, you need to import the required libraries, including bokeh.plotting, to create the plot.
+
+2.Prepare your data: Next, prepare the data you want to visualize in the plot.
+
+3.Create a figure: Use the figure() function from bokeh.plotting to create a blank figure, where you can add your visual elements.
+
+4.Add glyphs: Add visual elements, such as circles, lines, or bars, to the figure using glyph functions like circle(), line(), rect(), etc.
+
+5.Customize the plot: Customize the plot by setting attributes like title, axis labels, colors, sizes, etc.
+
+6.Show the plot: Finally, call the show() function from bokeh.io to display the plot.
+
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+# Prepare the data
+x = [1, 2, 3, 4, 5]
+y = [6, 7, 2, 4, 5]
+
+# Step 1: Create a figure
+p = figure(title='Simple Scatter Plot', x_axis_label='X-axis', y_axis_label='Y-axis')
+
+# Step 2: Add glyphs (scatter circles in this case)
+p.circle(x, y, size=10, color='blue', alpha=0.5)
+
+# Step 3: Customize the plot
+p.title.text_font_size = '16pt'
+p.title.align = 'center'
+
+# Step 4: Show the plot
+output_notebook()  # For displaying the plot in a Jupyter Notebook
+show(p)
+Loading BokehJS ...
+Q2. What are glyphs in Bokeh, and how can you add them to a Bokeh plot? Explain with an example.
+In Bokeh, glyphs are the visual shapes and markers used to represent data on a plot. They include various types such as circles, squares, lines, rectangles, triangles, and more. Glyphs are added to a Bokeh plot using specific glyph functions provided by Bokeh's bokeh.plotting module.
+
+To add glyphs to a Bokeh plot, follow these steps:
+
+1.Import the necessary libraries: Import the required classes and functions from Bokeh to create and display the plot.
+
+2.Prepare your data: Organize the data you want to visualize on the plot.
+
+3.Create a figure: Use the figure() function to create a blank figure where you will add the glyphs.
+
+4.Add glyphs: Use glyph functions like circle(), line(), rect(), etc., to add the visual elements to the figure, providing the necessary data and customizing attributes like color, size, and transparency.
+
+5.Customize the plot: Customize the plot by setting attributes like title, axis labels, colors, sizes, etc.
+
+6.Show the plot: Call the show() function from bokeh.io to display the plot.
+
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+# Prepare the data
+x = [1, 2, 3, 4, 5]
+y = [6, 7, 2, 4, 5]
+
+# Step 1: Create a figure
+p = figure(title='Example of Glyphs in Bokeh', x_axis_label='X-axis', y_axis_label='Y-axis')
+
+# Step 2: Add glyphs (scatter circles and a line in this case)
+p.circle(x, y, size=10, color='blue', alpha=0.5)  # Adding scatter circles
+p.line(x, y, line_width=2, color='red')  # Adding a line connecting the points
+
+# Step 3: Customize the plot
+p.title.text_font_size = '16pt'
+p.title.align = 'center'
+
+# Step 4: Show the plot
+output_notebook()  # For displaying the plot in a Jupyter Notebook
+show(p)
+Loading BokehJS ...
+Q3. How can you customize the appearance of a Bokeh plot, including the axes, title, and legend?
+You can customize the appearance of a Bokeh plot, including the axes, title, and legend, by accessing and modifying various properties of the plot and its components. Bokeh provides a wide range of options to customize different aspects of the plot. Below are some common customizations you can make:
+
+1.Title and Axis Labels:
+
+To set the title of the plot, use plot.title.text to modify the title text and plot.title.text_font_size to change the font size.
+
+To label the x-axis and y-axis, use plot.xaxis.axis_label and plot.yaxis.axis_label properties. Axis Ticks and Formatting:
+
+To customize the tick labels on the axes, use plot.xaxis.ticker and plot.yaxis.ticker.
+
+To format the tick labels, use plot.xaxis.formatter and plot.yaxis.formatter.
+
+2.Legend:
+
+To add a legend to the plot, use plot.legend property. You can customize the location and other properties of the legend, such as title and font size.
+
+3.Background and Gridlines:
+
+To change the background color of the plot, use plot.background_fill_color and plot.border_fill_color.
+
+To show or hide gridlines, use plot.xgrid.grid_line_color and plot.ygrid.grid_line_color.
+
+4.Glyph Customization:
+
+For specific glyph customization, you can set properties like size, color, alpha (transparency), and line width directly in the glyph functions.
+
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+# Prepare the data
+x = [1, 2, 3, 4, 5]
+y = [6, 7, 2, 4, 5]
+
+# Create a figure
+p = figure(title='Customized Bokeh Plot', x_axis_label='X-axis', y_axis_label='Y-axis', sizing_mode='stretch_width')
+
+# Add glyphs (scatter circles)
+p.circle(x, y, size=10, color='blue', alpha=0.5, legend_label='Data Points')
+
+# Customize the plot
+p.title.text_font_size = '16pt'
+p.title.align = 'center'
+p.xaxis.axis_label_text_font_style = 'italic'
+p.yaxis.axis_label_text_color = 'red'
+p.legend.location = 'top_left'
+p.legend.label_text_font_size = '12pt'
+p.xgrid.visible = True
+p.ygrid.visible = True
+p.background_fill_color = 'lightgray'
+p.border_fill_color = 'white'
+
+# Show the plot
+output_notebook()  # For displaying the plot in a Jupyter Notebook
+show(p)
+Loading BokehJS ...
+Q4. What is a Bokeh server, and how can you use it to create interactive plots that can be updated in real time?
+A Bokeh server is a Python process that allows you to create and serve interactive Bokeh plots and applications. It enables you to build web applications with rich, interactive data visualizations that can be updated in real time without the need to regenerate or reload the entire plot or page.
+
+Using the Bokeh server, you can create dynamic web applications that respond to user interactions, such as selections, slider adjustments, button clicks, and more. When the user interacts with the plot, the server processes the events and updates the plot's data or appearance accordingly, allowing for a seamless and interactive user experience.
+
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+# Prepare the data
+x = [1, 2, 3, 4, 5]
+y = [6, 7, 2, 4, 5]
+
+# Create a figure
+p = figure(title='Customized Bokeh Plot', x_axis_label='X-axis', y_axis_label='Y-axis', width=500, height=300)
+
+# Add glyphs (scatter circles)
+p.circle(x, y, size=10, color='blue', alpha=0.5, legend_label='Data Points')
+
+# Customize the plot
+p.title.text_font_size = '16pt'
+p.title.align = 'center'
+p.xaxis.axis_label_text_font_style = 'italic'
+p.yaxis.axis_label_text_color = 'red'
+p.legend.location = 'top_left'
+p.legend.label_text_font_size = '12pt'
+p.xgrid.visible = True
+p.ygrid.visible = True
+p.background_fill_color = 'lightgray'
+p.border_fill_color = 'white'
+
+# Show the plot
+output_notebook()  # For displaying the plot in a Jupyter Notebook
+show(p)
+Loading BokehJS ...
+Q5. How can you embed a Bokeh plot into a web page or dashboard using Flask or Django?
+To embed a Bokeh plot into a web page or dashboard using Flask or Django, you can use the Bokeh components function to generate the necessary JavaScript and HTML code for the plot, and then include that code in your Flask or Django template.
+
+Here's a step-by-step guide on how to do it:
+
+1.Create a Bokeh plot as usual using the Bokeh library. This can be a static plot or a plot with interactive elements (widgets, sliders, etc.).
+
+2.Use the components function from Bokeh to obtain the JavaScript and HTML components required to embed the plot in a web page. The components function takes the Bokeh plot object as input and returns a tuple containing the JavaScript and HTML code.
+
+3.In your Flask or Django view, pass the JavaScript and HTML components to the template context. If you're using Flask, you'll use the render_template function to render the HTML template. For Django, you'll use the render function.
+
+4.In your HTML template, include the JavaScript and HTML components where you want the plot to appear. The JavaScript code initializes and renders the Bokeh plot on the web page, and the HTML code defines the space where the plot will be displayed.
+
+pip install flask
+Collecting flask
+  Downloading Flask-2.3.2-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.9/96.9 kB 3.9 MB/s eta 0:00:00
+Requirement already satisfied: click>=8.1.3 in /opt/conda/lib/python3.10/site-packages (from flask) (8.1.3)
+Collecting Werkzeug>=2.3.3
+  Downloading Werkzeug-2.3.6-py3-none-any.whl (242 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 242.5/242.5 kB 16.9 MB/s eta 0:00:00
+Collecting blinker>=1.6.2
+  Downloading blinker-1.6.2-py3-none-any.whl (13 kB)
+Collecting itsdangerous>=2.1.2
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Requirement already satisfied: Jinja2>=3.1.2 in /opt/conda/lib/python3.10/site-packages (from flask) (3.1.2)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/conda/lib/python3.10/site-packages (from Jinja2>=3.1.2->flask) (2.1.1)
+Installing collected packages: Werkzeug, itsdangerous, blinker, flask
+  Attempting uninstall: blinker
+    Found existing installation: blinker 1.5
+    Uninstalling blinker-1.5:
+      Successfully uninstalled blinker-1.5
+Successfully installed Werkzeug-2.3.6 blinker-1.6.2 flask-2.3.2 itsdangerous-2.1.2
+Note: you may need to restart the kernel to use updated packages.
+# app.py (Flask application)
+
+from flask import Flask, render_template
+from bokeh.plotting import figure
+from bokeh.embed import components
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    # Create a Bokeh plot
+    x = [1, 2, 3, 4, 5]
+    y = [6, 7, 2, 4, 5]
+    p = figure(title='Embedded Bokeh Plot', x_axis_label='X-axis', y_axis_label='Y-axis', width=400, height=300)
+    p.circle(x, y, size=10, color='blue', alpha=0.5)
+
+    # Get the JavaScript and HTML components for embedding the plot
+    script, div = components(p)
+
+    # Pass the JavaScript and HTML components to the template
+    return render_template('index.html', script=script, div=div)
+
+if __name__ == '__main__':
+    app.run(debug=True)
