@@ -1,0 +1,241 @@
+Q1. What is the Probability density function?
+The Probability Density Function (PDF) is a concept used in probability theory and statistics to describe the likelihood of a continuous random variable taking on a specific value within a given range. In simple terms, the PDF provides a way to model the probability distribution of a continuous random variable.
+
+The PDF is typically denoted by the function f(x) and is defined such that the probability of the random variable taking on any specific value is equal to the area under the curve of the PDF over that range of values. However, unlike the cumulative distribution function (CDF), which gives the probability of a random variable being less than or equal to a certain value, the PDF gives the probability density at a particular point.
+
+The PDF satisfies the following properties:
+
+1.The PDF is always non-negative: f(x) ≥ 0 for all x.
+
+2.The total area under the PDF curve is equal to 1: ∫[−∞, ∞] f(x) dx = 1.
+
+Q2. What are the types of Probability distribution?
+There are several types of probability distributions used in statistics and probability theory, each serving different purposes and representing various types of random variables. The two main categories of probability distributions are:
+
+1.Discrete Probability Distributions:
+
+Discrete probability distributions describe the probabilities associated with discrete or countable random variables. In this type of distribution, the random variable can only take on specific distinct values. The probabilities for each possible value are represented by the Probability Mass Function (PMF).
+
+Examples of discrete probability distributions include:
+
+Bernoulli Distribution: Describes the probability of a binary outcome (success/failure) for a single trial.
+
+Binomial Distribution: Represents the probability of getting a specific number of successes in a fixed number of independent Bernoulli trials.
+
+Poisson Distribution: Models the number of events occurring in a fixed interval of time or space, given the average rate of occurrence.
+
+2.Continuous Probability Distributions:
+
+Continuous probability distributions describe the probabilities associated with continuous random variables. In this type of distribution, the random variable can take on any value within a specific range. The probabilities are represented by the Probability Density Function (PDF).
+
+Examples of continuous probability distributions include:
+
+Normal Distribution (Gaussian Distribution): A bell-shaped curve commonly used to model natural phenomena in which the data cluster around a mean value.
+
+3.Exponential Distribution: Models the time between events occurring in a Poisson process.
+
+Uniform Distribution: Represents a constant probability over a specified interval, with all values having the same likelihood of occurring.
+
+These are just a few examples of the many probability distributions used in various fields, such as engineering, physics, biology, economics, and more. Understanding the characteristics and properties of these distributions is essential for various statistical analyses and hypothesis testing.
+
+Q3. Write a Python function to calculate the probability density function of a normal distribution with given mean and standard deviation at a given point.
+You can use the scipy.stats.norm module in Python to calculate the probability density function (PDF) of a normal distribution at a given point. The norm module provides functions to work with the normal distribution, including calculating PDF values. Here's a Python function to do that:
+
+from scipy.stats import norm
+
+def normal_pdf(x, mean, std_dev):
+    """
+    Calculate the probability density function (PDF) of a normal distribution.
+
+    Parameters:
+        x (float): The point at which to calculate the PDF.
+        mean (float): Mean of the normal distribution.
+        std_dev (float): Standard deviation of the normal distribution.
+
+    Returns:
+        float: The PDF value at the given point.
+    """
+    pdf_value = norm.pdf(x, loc=mean, scale=std_dev)
+    return pdf_value
+Q4. What are the properties of Binomial distribution? Give two examples of events where binomial distribution can be applied.
+Properties of the Binomial Distribution:
+
+Discrete Probability Distribution: The binomial distribution is a discrete probability distribution, which means it is used to model the probabilities of a specific number of successes in a fixed number of independent trials.
+
+Two Possible Outcomes: Each trial in a binomial distribution can have only two possible outcomes: success or failure. These outcomes are often denoted as "S" and "F," or "1" and "0."
+
+Fixed Number of Trials: The number of trials (n) is fixed and predetermined in advance.
+
+Independent Trials: Each trial is assumed to be independent of the others, meaning the outcome of one trial does not influence the outcome of the next.
+
+Constant Probability of Success: The probability of success (p) remains constant across all trials.
+
+Probability Mass Function (PMF): The binomial distribution is defined by its Probability Mass Function (PMF), which calculates the probability of getting exactly k successes in n trials.
+
+from scipy.stats import binom
+
+# Number of flips
+n_flips = 10
+
+# Probability of heads (success)
+p_heads = 0.5
+
+# Number of heads (successes)
+k_heads = 5
+
+# Calculate the probability of getting 5 heads in 10 flips
+probability = binom.pmf(k_heads, n_flips, p_heads)
+print("Probability of getting 5 heads in 10 flips:", probability)
+Probability of getting 5 heads in 10 flips: 0.24609375000000003
+from scipy.stats import binom
+
+# Batch size
+batch_size = 100
+
+# Probability of a defective product
+p_defective = 0.02
+
+# Number of defective products
+k_defective = 3
+
+# Calculate the probability of having 3 defective products in a batch of 100
+probability = binom.pmf(k_defective, batch_size, p_defective)
+print("Probability of having 3 defective products in a batch of 100:", probability)
+Probability of having 3 defective products in a batch of 100: 0.18227594104651598
+Q5. Generate a random sample of size 1000 from a binomial distribution with probability of success 0.4 and plot a histogram of the results using matplotlib.
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set the seed for reproducibility (optional)
+np.random.seed(42)
+
+# Parameters for the binomial distribution
+n_trials = 1000      # Number of trials (sample size)
+p_success = 0.4      # Probability of success
+
+# Generate random sample from the binomial distribution
+random_sample = np.random.binomial(n=1, p=p_success, size=n_trials)
+
+# Plot the histogram
+plt.hist(random_sample, bins=2, rwidth=0.8, align='left', alpha=0.7)
+plt.xlabel('Number of Successes')
+plt.ylabel('Frequency')
+plt.xticks([0, 1], ['Failure', 'Success'])
+plt.title('Binomial Distribution with p=0.4')
+plt.show()
+
+Q6. Write a Python function to calculate the cumulative distribution function of a Poisson distribution with given mean at a given point.
+from scipy.stats import poisson
+
+def poisson_cdf(x, mean):
+    """
+    Calculate the cumulative distribution function (CDF) of a Poisson distribution.
+
+    Parameters:
+        x (int): The point at which to calculate the CDF.
+        mean (float): Mean of the Poisson distribution.
+
+    Returns:
+        float: The CDF value at the given point.
+    """
+    cdf_value = poisson.cdf(x, mu=mean)
+    return cdf_value
+mean = 5
+
+Calculate the CDF at x = 2
+
+cdf_at_x = poisson_cdf(2, mean)
+
+print("CDF at x = 2:", cdf_at_x)
+
+Q7. How Binomial distribution different from Poisson distribution?
+The Binomial distribution and Poisson distribution are both probability distributions used to model the number of successes or events in a fixed number of trials or a fixed interval of time or space. However, they have some key differences in their underlying assumptions and applications:
+
+Assumptions:
+
+Binomial Distribution: The binomial distribution assumes a fixed number of independent trials, each with two possible outcomes (success or failure). The probability of success remains constant across all trials.
+
+Poisson Distribution: The Poisson distribution assumes a fixed interval of time or space and measures the number of events occurring within that interval. It is used to model rare events where the average rate of occurrence is known, and the events happen independently of each other. Type of Random Variable:
+
+Binomial Distribution: The binomial distribution models a discrete random variable, as it deals with a count of successes in a fixed number of trials. The number of successes must be a whole number.
+
+Poisson Distribution: The Poisson distribution also models a discrete random variable, representing the count of events in a fixed interval. The number of events must be a whole number.
+
+Number of Trials/Events:
+
+Binomial Distribution: The binomial distribution requires a fixed and predetermined number of trials (n), and the random variable represents the number of successes (k) out of those n trials.
+
+Poisson Distribution: The Poisson distribution does not involve a fixed number of trials. Instead, it is used to model the count of rare events within a specified interval, where the average rate of occurrence (λ) is known.
+
+Probability of Success/Event Rate:
+
+Binomial Distribution: In the binomial distribution, the probability of success (p) remains constant across all trials. Poisson Distribution: In the Poisson distribution, the average rate of events (λ) remains constant over time or space, but the probability of each individual event may vary.
+
+Applications:
+
+Binomial Distribution: The binomial distribution is commonly used for scenarios like coin flips, product quality control, survey responses (yes/no), and situations where each trial has two possible outcomes.
+
+Poisson Distribution: The Poisson distribution is used to model rare events or phenomena with a known average rate of occurrence, such as the number of customers arriving at a store per hour, the number of defects in a product, or the number of accidents in a day.
+
+In summary, both distributions deal with the count of events, but the key differences lie in the underlying assumptions and applications. The binomial distribution is suitable for discrete events with a fixed number of trials and constant probability, while the Poisson distribution is suitable for modeling rare events occurring independently within a fixed interval with a known average rate of occurrence.
+
+Q8. Generate a random sample of size 1000 from a Poisson distribution with mean 5 and calculate the sample mean and variance.
+import numpy as np
+
+# Set the seed for reproducibility (optional)
+np.random.seed(42)
+
+# Parameters for the Poisson distribution
+mean = 5
+sample_size = 1000
+
+# Generate random sample from the Poisson distribution
+random_sample = np.random.poisson(mean, size=sample_size)
+
+# Calculate the sample mean and variance
+sample_mean = np.mean(random_sample)
+sample_variance = np.var(random_sample, ddof=1)
+
+print("Sample Mean:", sample_mean)
+print("Sample Variance:", sample_variance)
+Sample Mean: 4.985
+Sample Variance: 5.001776776776777
+Q9. How mean and variance are related in Binomial distribution and Poisson distribution?
+In both the Binomial distribution and Poisson distribution, the mean and variance are related, but the nature of their relationship is different.
+
+1.Binomial Distribution:
+
+In a Binomial distribution with parameters n (number of trials) and p (probability of success), the mean (μ) and variance (σ^2) are related as follows:
+
+μ = n * p
+
+σ^2 = n * p * (1 - p)
+
+The mean of a Binomial distribution is equal to the product of the number of trials and the probability of success in each trial. The variance is the product of the number of trials, the probability of success, and the complement of the probability of success.
+
+2.Poisson Distribution:
+
+In a Poisson distribution with parameter λ (average rate of occurrence), the mean (μ) and variance (σ^2) are related as follows:
+
+μ = λ σ^2 = λ
+
+The mean and variance of a Poisson distribution are both equal to the average rate of occurrence (λ).
+
+In summary, for both the Binomial distribution and Poisson distribution:
+
+Mean (μ) is a measure of central tendency, representing the average value.
+
+Variance (σ^2) is a measure of dispersion, indicating the spread or variability of the data around the mean.
+
+However, the specific formulas for calculating the mean and variance are different for each distribution. For the Binomial distribution, the variance is influenced by both the number of trials and the probability of success, while for the Poisson distribution, the variance is solely determined by the average rate of occurrence.
+
+Q10. In normal distribution with respect to mean position, where does the least frequent data appear?
+In a normal distribution, the least frequent data appears in the tails of the distribution, farthest away from the mean. The normal distribution is a symmetric bell-shaped curve, and its probability density is highest around the mean. As we move away from the mean towards the tails of the distribution, the probability density gradually decreases, indicating that values in the tails are less likely to occur.
+
+The normal distribution has a continuous probability density function, and it extends infinitely in both positive and negative directions. The probability density is highest at the mean and decreases as we move further away from the mean towards the tails.
+
+In a standard normal distribution (with mean = 0 and standard deviation = 1), approximately 68% of the data lies within one standard deviation from the mean (within the first standard deviation interval), about 95% lies within two standard deviations, and approximately 99.7% lies within three standard deviations.
+
+The data in the tails of the distribution (beyond three standard deviations from the mean) is the least frequent and represents extreme or rare values. These extreme values have a lower likelihood of occurrence compared to values near the mean.
+
+In summary, the least frequent data in a normal distribution appears in the tails, which are the regions farthest away from the mean. The most frequent and densest data is concentrated around the mean, making it the central and most probable value in a normal distribution.
