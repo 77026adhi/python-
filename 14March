@@ -1,0 +1,397 @@
+Q1. Write a Python function that takes in two arrays of data and calculates the F-value for a variance ratio test. The function should return the F-value and the corresponding p-value for the test.
+import scipy.stats as stats
+
+def variance_ratio_test(data1, data2):
+    """
+    Perform a variance ratio test (F-test) between two arrays of data.
+
+    Parameters:
+        data1 (array-like): First array of data.
+        data2 (array-like): Second array of data.
+
+    Returns:
+        f_value (float): The calculated F-value for the variance ratio test.
+        p_value (float): The corresponding p-value for the test.
+    """
+    # Perform the variance ratio test (F-test)
+    f_value, p_value = stats.f_oneway(data1, data2)
+
+    return f_value, p_value
+
+data1 = [1, 2, 3, 4, 5]
+data2 = [6, 7, 8, 9, 10]
+
+f_value, p_value = variance_ratio_test(data1, data2)
+print("F-value:", f_value)
+print("p-value:", p_value)
+F-value: 25.0
+p-value: 0.0010528257933665396
+Q2. Given a significance level of 0.05 and the degrees of freedom for the numerator and denominator of an F-distribution, write a Python function that returns the critical F-value for a two-tailed test.
+import scipy.stats as stats
+
+def critical_f_value(alpha, dfn, dfd):
+    """
+    Calculate the critical F-value for a two-tailed test.
+
+    Parameters:
+        alpha (float): The significance level (e.g., 0.05 for 5% significance).
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+
+    Returns:
+        critical_f (float): The critical F-value for the two-tailed test.
+    """
+    # Calculate the critical F-value using the percent point function (ppf) of the F-distribution
+    critical_f = stats.f.ppf(1 - alpha/2, dfn, dfd)
+
+    return critical_f
+
+alpha = 0.05
+dfn = 3
+dfd = 20
+
+critical_f = critical_f_value(alpha, dfn, dfd)
+print("Critical F-value:", critical_f)
+Critical F-value: 3.8586986662732143
+Q3. Write a Python program that generates random samples from two normal distributions with known variances and uses an F-test to determine if the variances are equal. The program should output the F- value, degrees of freedom, and p-value for the test.
+import numpy as np
+import scipy.stats as stats
+
+def variance_equality_test(sample_size1, sample_size2, variance1, variance2, alpha):
+    """
+    Perform an F-test to determine if the variances of two normal distributions are equal.
+
+    Parameters:
+        sample_size1 (int): Sample size of the first distribution.
+        sample_size2 (int): Sample size of the second distribution.
+        variance1 (float): Known variance of the first distribution.
+        variance2 (float): Known variance of the second distribution.
+        alpha (float): The significance level (e.g., 0.05 for 5% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Generate random samples from two normal distributions with known variances
+    sample1 = np.random.normal(loc=0, scale=np.sqrt(variance1), size=sample_size1)
+    sample2 = np.random.normal(loc=0, scale=np.sqrt(variance2), size=sample_size2)
+
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway(sample1, sample2)
+
+    # Calculate degrees of freedom
+    dfn = sample_size1 - 1
+    dfd = sample_size2 - 1
+
+    return f_value, dfn, dfd, p_value
+
+# Example usage
+sample_size1 = 30
+sample_size2 = 40
+variance1 = 4.0
+variance2 = 5.0
+alpha = 0.05
+
+f_value, dfn, dfd, p_value = variance_equality_test(sample_size1, sample_size2, variance1, variance2, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+F-value: 0.7690758462866782
+Degrees of freedom (numerator): 29
+Degrees of freedom (denominator): 39
+p-value: 0.3835908603689383
+Q4.The variances of two populations are known to be 10 and 15. A sample of 12 observations is taken from each population. Conduct an F-test at the 5% significance level to determine if the variances are significantly different.
+import scipy.stats as stats
+
+def f_test(sample_size1, sample_size2, variance1, variance2, alpha):
+    """
+    Perform an F-test to determine if the variances of two populations are significantly different.
+
+    Parameters:
+        sample_size1 (int): Sample size of the first population.
+        sample_size2 (int): Sample size of the second population.
+        variance1 (float): Known variance of the first population.
+        variance2 (float): Known variance of the second population.
+        alpha (float): The significance level (e.g., 0.05 for 5% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway([variance1] * sample_size1, [variance2] * sample_size2)
+
+    # Calculate degrees of freedom
+    dfn = sample_size1 - 1
+    dfd = sample_size2 - 1
+
+    return f_value, dfn, dfd, p_value
+
+# Given data
+sample_size1 = 12
+sample_size2 = 12
+variance1 = 10.0
+variance2 = 15.0
+alpha = 0.05
+
+f_value, dfn, dfd, p_value = f_test(sample_size1, sample_size2, variance1, variance2, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+F-value: inf
+Degrees of freedom (numerator): 11
+Degrees of freedom (denominator): 11
+p-value: 0.0
+/opt/conda/lib/python3.10/site-packages/scipy/stats/_stats_py.py:3906: ConstantInputWarning: Each of the input arrays is constant;the F statistic is not defined or infinite
+  warnings.warn(stats.ConstantInputWarning(msg))
+Q5. A manufacturer claims that the variance of the diameter of a certain product is 0.005. A sample of 25 products is taken, and the sample variance is found to be 0.006. Conduct an F-test at the 1% significance level to determine if the claim is justified.
+import scipy.stats as stats
+
+def f_test(sample_size, sample_variance, population_variance, alpha):
+    """
+    Perform an F-test to compare the sample variance to the claimed population variance.
+
+    Parameters:
+        sample_size (int): Sample size.
+        sample_variance (float): Sample variance.
+        population_variance (float): Claimed population variance.
+        alpha (float): The significance level (e.g., 0.01 for 1% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway([sample_variance], [population_variance])
+
+    # Calculate degrees of freedom
+    dfn = 1  # One degree of freedom for the numerator (sample variance)
+    dfd = sample_size - 1  # Degrees of freedom for the denominator (sample size - 1)
+
+    return f_value, dfn, dfd, p_value
+
+# Given data
+sample_size = 25
+sample_variance = 0.006
+population_variance_claimed = 0.005
+alpha = 0.01  # 1% significance level
+
+f_value, dfn, dfd, p_value = f_test(sample_size, sample_variance, population_variance_claimed, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+
+# Interpretation of the results
+if p_value < alpha:
+    print("Reject the null hypothesis. The sample variance is significantly different from the claimed population variance.")
+else:
+    print("Fail to reject the null hypothesis. The sample variance is not significantly different from the claimed population variance.")
+F-value: nan
+Degrees of freedom (numerator): 1
+Degrees of freedom (denominator): 24
+p-value: nan
+Fail to reject the null hypothesis. The sample variance is not significantly different from the claimed population variance.
+/opt/conda/lib/python3.10/site-packages/scipy/stats/_stats_py.py:3880: DegenerateDataWarning: all input arrays have length 1.  f_oneway requires that at least one input has length greater than 1.
+  warnings.warn(stats.DegenerateDataWarning(msg))
+Q6. Write a Python function that takes in the degrees of freedom for the numerator and denominator of an F-distribution and calculates the mean and variance of the distribution. The function should return the mean and variance as a tuple.
+def f_distribution_mean_variance(dfn, dfd):
+    """
+    Calculate the mean and variance of an F-distribution.
+
+    Parameters:
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+
+    Returns:
+        mean (float): The calculated mean of the F-distribution.
+        variance (float): The calculated variance of the F-distribution.
+    """
+    # Calculate the mean of the F-distribution
+    mean = dfd / (dfd - 2)
+
+    # Calculate the variance of the F-distribution
+    variance = (2 * (dfd**2) * (dfn + dfd - 2)) / (dfn * (dfd - 2)**2 * (dfd - 4))
+
+    return mean, variance
+
+dfn = 5
+dfd = 10
+
+mean, variance = f_distribution_mean_variance(dfn, dfd)
+print("Mean:", mean)
+print("Variance:", variance)
+Mean: 1.25
+Variance: 1.3541666666666667
+Q7. A random sample of 10 measurements is taken from a normal population with unknown variance. The sample variance is found to be 25. Another random sample of 15 measurements is taken from another normal population with unknown variance, and the sample variance is found to be 20. Conduct an F-test at the 10% significance level to determine if the variances are significantly different.
+import scipy.stats as stats
+
+def f_test(sample_size1, sample_variance1, sample_size2, sample_variance2, alpha):
+    """
+    Perform an F-test to compare the sample variances of two populations.
+
+    Parameters:
+        sample_size1 (int): Sample size of the first population.
+        sample_variance1 (float): Sample variance of the first population.
+        sample_size2 (int): Sample size of the second population.
+        sample_variance2 (float): Sample variance of the second population.
+        alpha (float): The significance level (e.g., 0.1 for 10% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway([sample_variance1], [sample_variance2])
+
+    # Calculate degrees of freedom
+    dfn = sample_size1 - 1
+    dfd = sample_size2 - 1
+
+    return f_value, dfn, dfd, p_value
+
+# Given data
+sample_size1 = 10
+sample_variance1 = 25
+sample_size2 = 15
+sample_variance2 = 20
+alpha = 0.10  # 10% significance level
+
+f_value, dfn, dfd, p_value = f_test(sample_size1, sample_variance1, sample_size2, sample_variance2, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+
+# Interpretation of the results
+if p_value < alpha:
+    print("Reject the null hypothesis. The variances are significantly different.")
+else:
+    print("Fail to reject the null hypothesis. The variances are not significantly different.")
+F-value: nan
+Degrees of freedom (numerator): 9
+Degrees of freedom (denominator): 14
+p-value: nan
+Fail to reject the null hypothesis. The variances are not significantly different.
+Q8. The following data represent the waiting times in minutes at two different restaurants on a Saturday night: Restaurant A: 24, 25, 28, 23, 22, 20, 27; Restaurant B: 31, 33, 35, 30, 32, 36. Conduct an F-test at the 5% significance level to determine if the variances are significantly different.
+import numpy as np
+import scipy.stats as stats
+
+def f_test(sample1, sample2, alpha):
+    """
+    Perform an F-test to compare the sample variances of two populations.
+
+    Parameters:
+        sample1 (array-like): Sample data for the first population.
+        sample2 (array-like): Sample data for the second population.
+        alpha (float): The significance level (e.g., 0.05 for 5% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Calculate the sample variances
+    sample_variance1 = np.var(sample1, ddof=1)  # ddof=1 for unbiased sample variance calculation
+    sample_variance2 = np.var(sample2, ddof=1)
+
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway(sample1, sample2)
+
+    # Calculate degrees of freedom
+    dfn = len(sample1) - 1
+    dfd = len(sample2) - 1
+
+    return f_value, dfn, dfd, p_value
+
+# Given data
+restaurant_A = np.array([24, 25, 28, 23, 22, 20, 27])
+restaurant_B = np.array([31, 33, 35, 30, 32, 36])
+alpha = 0.05  # 5% significance level
+
+f_value, dfn, dfd, p_value = f_test(restaurant_A, restaurant_B, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+
+# Interpretation of the results
+if p_value < alpha:
+    print("Reject the null hypothesis. The variances are significantly different.")
+else:
+    print("Fail to reject the null hypothesis. The variances are not significantly different.")
+F-value: 36.42289051820553
+Degrees of freedom (numerator): 6
+Degrees of freedom (denominator): 5
+p-value: 8.48759371471029e-05
+Reject the null hypothesis. The variances are significantly different.
+Q9. The following data represent the test scores of two groups of students: Group A: 80, 85, 90, 92, 87, 83; Group B: 75, 78, 82, 79, 81, 84. Conduct an F-test at the 1% significance level to determine if the variances are significantly different.
+import numpy as np
+import scipy.stats as stats
+
+def f_test(sample1, sample2, alpha):
+    """
+    Perform an F-test to compare the sample variances of two populations.
+
+    Parameters:
+        sample1 (array-like): Sample data for the first population.
+        sample2 (array-like): Sample data for the second population.
+        alpha (float): The significance level (e.g., 0.01 for 1% significance).
+
+    Returns:
+        f_value (float): The calculated F-value for the F-test.
+        dfn (int): Degrees of freedom for the numerator.
+        dfd (int): Degrees of freedom for the denominator.
+        p_value (float): The p-value for the F-test.
+    """
+    # Calculate the sample variances
+    sample_variance1 = np.var(sample1, ddof=1)  # ddof=1 for unbiased sample variance calculation
+    sample_variance2 = np.var(sample2, ddof=1)
+
+    # Perform the F-test
+    f_value, p_value = stats.f_oneway(sample1, sample2)
+
+    # Calculate degrees of freedom
+    dfn = len(sample1) - 1
+    dfd = len(sample2) - 1
+
+    return f_value, dfn, dfd, p_value
+
+# Given data
+group_A = np.array([80, 85, 90, 92, 87, 83])
+group_B = np.array([75, 78, 82, 79, 81, 84])
+alpha = 0.01  # 1% significance level
+
+f_value, dfn, dfd, p_value = f_test(group_A, group_B, alpha)
+
+print("F-value:", f_value)
+print("Degrees of freedom (numerator):", dfn)
+print("Degrees of freedom (denominator):", dfd)
+print("p-value:", p_value)
+
+# Interpretation of the results
+if p_value < alpha:
+    print("Reject the null hypothesis. The variances are significantly different.")
+else:
+    print("Fail to reject the null hypothesis. The variances are not significantly different.")
+F-value: 8.040089086859687
+Degrees of freedom (numerator): 5
+Degrees of freedom (denominator): 5
+p-value: 0.017684171924487787
+Fail to reject the null hypothesis. The variances are not significantly different.
