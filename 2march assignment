@@ -1,0 +1,208 @@
+
+Q1: What is Matplotlib? Why is it used? Name five plots that can be plotted using the Pyplot module of Matplotlib.
+Matplotlib is a popular Python library used for creating static, interactive, and animated visualizations. It provides a wide range of functions and tools to generate high-quality plots, charts, and graphs to represent data in a visually appealing and informative manner.
+
+It is used for various purposes, such as:
+
+Data Visualization: Matplotlib helps in creating various types of plots to visualize data, making it easier to interpret trends, patterns, and relationships within the data.
+
+Exploratory Data Analysis (EDA): Before diving deep into data analysis, visualizations created using Matplotlib can help in understanding the distribution and characteristics of the dataset.
+
+Presentation and Reporting: Matplotlib's ability to produce publication-quality graphics makes it an excellent choice for creating visuals in presentations, research papers, and reports.
+
+Model Evaluation: In fields like machine learning, Matplotlib aids in visualizing model evaluation metrics, confusion matrices, ROC curves, etc., to assess model performance.
+
+Customization: It allows users to customize plots extensively, enabling them to control various aspects like color, line styles, labels, legends, titles, and more.
+
+Five plots that can be plotted using the Pyplot module of Matplotlib are:
+
+Line Plot: A basic plot where data points are connected by straight lines, useful for visualizing trends over continuous data.
+
+Scatter Plot: Shows individual data points as separate markers, useful for identifying relationships and correlations between two variables.
+
+Bar Plot: Represents data with rectangular bars of varying heights, suitable for comparing discrete data across different categories.
+
+Histogram: Displays the distribution of a continuous dataset using bins or intervals to count data occurrences.
+
+Pie Chart: Represents data as slices of a circle, where each slice's size corresponds to the proportion of the data it represents, suitable for displaying parts of a whole.
+
+These are just a few examples, but Matplotlib offers many more plot types and customization options to cater to various visualization needs.
+
+Q2: What is a scatter plot? Use the following code to generate data for x and y. Using this generated data plot a scatter plot.
+import numpy as np
+
+np.random.seed(3)
+
+x = 3 + np.random.normal(0, 2, 50)
+
+y = 3 + np.random.normal(0, 2, len(x))
+
+Note: Also add title, xlabel, and ylabel to the plot.
+
+A scatter plot is a type of plot used to visualize the relationship between two continuous variables. It represents individual data points as dots, where each dot's position on the plot corresponds to the values of the variables being plotted. Scatter plots are useful for identifying patterns, trends, or correlations between the two variables.
+
+Below is the code to generate data for x and y using the provided code snippet and plot a scatter plot using Matplotlib:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate data for x and y
+np.random.seed(3)
+x = 3 + np.random.normal(0, 2, 50)
+y = 3 + np.random.normal(0, 2, len(x))
+
+# Create a scatter plot
+plt.scatter(x, y)
+
+# Add title and labels to the plot
+plt.title('Scatter Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+# Display the plot
+plt.show()
+
+Q3: Why is the subplot() function used? Draw four line plots using the subplot() function.
+Use the following data:
+
+import numpy as np
+
+For line 1: x = np.array([0, 1, 2, 3, 4, 5]) and y = np.array([0, 100, 200, 300, 400, 500])
+
+For line 2: x = np.array([0, 1, 2, 3, 4, 5]) and y = np.array([50, 20, 40, 20, 60, 70])
+
+For line 3: x = np.array([0, 1, 2, 3, 4, 5]) and y = np.array([10, 20, 30, 40, 50, 60])
+
+For line 4: x = np.array([0, 1, 2, 3, 4, 5]) and y = np.array([200, 350, 250, 550, 450, 150])
+
+The subplot() function in Matplotlib is used to create multiple plots within a single figure. It allows you to arrange plots in a grid-like pattern, specifying the number of rows, columns, and the position of each subplot. This is useful when you want to compare different plots side by side or display related visualizations together.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Data for line 1
+x1 = np.array([0, 1, 2, 3, 4, 5])
+y1 = np.array([0, 100, 200, 300, 400, 500])
+
+# Data for line 2
+x2 = np.array([0, 1, 2, 3, 4, 5])
+y2 = np.array([50, 20, 40, 20, 60, 70])
+
+# Data for line 3
+x3 = np.array([0, 1, 2, 3, 4, 5])
+y3 = np.array([10, 20, 30, 40, 50, 60])
+
+# Data for line 4
+x4 = np.array([0, 1, 2, 3, 4, 5])
+y4 = np.array([200, 350, 250, 550, 450, 150])
+
+# Create a 2x2 grid for the subplots
+plt.subplot(2, 2, 1)
+plt.plot(x1, y1)
+plt.title('Line 1')
+
+plt.subplot(2, 2, 2)
+plt.plot(x2, y2)
+plt.title('Line 2')
+
+plt.subplot(2, 2, 3)
+plt.plot(x3, y3)
+plt.title('Line 3')
+
+plt.subplot(2, 2, 4)
+plt.plot(x4, y4)
+plt.title('Line 4')
+
+# Adjust layout for better visualization
+plt.tight_layout()
+
+# Display the plots
+plt.show()
+
+Q4: What is a bar plot? Why is it used? Using the following data plot a bar plot and a horizontal bar plot.
+import numpy as np
+
+company = np.array(["Apple", "Microsoft", "Google", "AMD"])
+
+profit = np.array([3000, 8000, 1000, 10000])
+
+A bar plot is a type of plot used to display and compare categorical data. It represents data using rectangular bars, where the length or height of each bar corresponds to the value of the data it represents. Bar plots are useful for visualizing the distribution, comparison, or ranking of discrete data points across different categories.
+
+Bar plots are used for the following purposes:
+
+1.Comparing Categories: You can use a bar plot to compare the values of different categories or groups and identify trends or differences between them.
+
+2.Displaying Rankings: Bar plots are useful when you want to show the ranking of different categories based on their values.
+
+3.Visualizing Frequency: When you have categorical data and want to see the frequency or count of each category, a bar plot can be a great choice.
+
+4.Showing Aggregated Data: If you have data that is already aggregated into categories, a bar plot can present the summarized information in an easily understandable way.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+company = np.array(["Apple", "Microsoft", "Google", "AMD"])
+profit = np.array([3000, 8000, 1000, 10000])
+
+# Bar plot
+plt.figure(figsize=(8, 5))
+plt.bar(company, profit)
+plt.xlabel('Company')
+plt.ylabel('Profit')
+plt.title('Bar Plot')
+plt.show()
+
+# Horizontal bar plot
+plt.figure(figsize=(8, 5))
+plt.barh(company, profit)
+plt.xlabel('Profit')
+plt.ylabel('Company')
+plt.title('Horizontal Bar Plot')
+plt.show()
+
+
+Q5: What is a box plot? Why is it used? Using the following data plot a box plot.
+box1 = np.random.normal(100, 10, 200)
+
+box2 = np.random.normal(90, 20, 200)
+
+A box plot, also known as a box-and-whisker plot, is a statistical visualization used to display the distribution and summary statistics of a dataset. It provides a compact way to represent the minimum, first quartile (Q1), median (second quartile or Q2), third quartile (Q3), and maximum values of the data. The plot consists of a box (representing the interquartile range, IQR) with "whiskers" extending from the box to the minimum and maximum values within a certain range, and occasionally, individual data points are plotted as outliers.
+
+The key components of a box plot are as follows:
+
+-> The box represents the IQR, which is the range between the first quartile (Q1) and the third quartile (Q3). It spans the central 50% of the data.
+
+-> The line inside the box represents the median (Q2), which is the middle value of the dataset when sorted.
+
+-> The whiskers extend from the box to the minimum and maximum values within a certain range, typically 1.5 times the IQR or the actual minimum and maximum values within that range.
+
+-> Outliers (if present) are plotted as individual points beyond the whiskers.
+
+Box plots are used for the following purposes:
+
+1.Visualizing Data Distribution: Box plots provide a clear representation of the spread and symmetry (or skewness) of the data distribution.
+
+2.Identifying Outliers: Box plots can easily identify potential outliers in the dataset, which are data points that lie far from the central distribution.
+
+3.Comparing Datasets: Box plots are useful for comparing the distribution of multiple datasets side by side, allowing easy comparisons of their central tendencies and spreads.
+
+4.Assessing Data Variability: Box plots help in understanding the variability and dispersion of the data.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+box1 = np.random.normal(100, 10, 200)
+box2 = np.random.normal(90, 20, 200)
+
+# Data for the box plot
+data = [box1, box2]
+
+# Create a box plot
+plt.figure(figsize=(8, 6))
+plt.boxplot(data, labels=['Box 1', 'Box 2'])
+plt.xlabel('Box')
+plt.ylabel('Value')
+plt.title('Box Plot')
+plt.grid(True)
+plt.show()
+
