@@ -1,0 +1,83 @@
+Q1. Load the "titanic" dataset using the load_dataset function of seaborn. Use Plotly express to plot a scatter plot for age and fare columns in the titanic dataset.
+
+
+import seaborn as sns
+import plotly.express as px
+
+# Step 1: Load the "titanic" dataset
+titanic_dataset = sns.load_dataset("titanic")
+
+# Step 2: Create the scatter plot using Plotly Express
+fig = px.scatter(titanic_dataset, x='age', y='fare', title='Scatter Plot of Age vs. Fare',
+                 labels={'age': 'Age', 'fare': 'Fare'})
+
+# Show the plot
+fig.show()
+     
+Q2. Using the tips dataset in the Plotly library, plot a box plot using Plotly express.
+
+
+import seaborn as sns
+import plotly.express as px
+
+# Step 1: Load the "tips" dataset from Seaborn
+tips_dataset = sns.load_dataset("tips")
+
+# Step 2: Create the box plot using Plotly Express
+fig = px.box(tips_dataset, x='day', y='total_bill', title='Box Plot of Total Bill by Day',
+             labels={'day': 'Day of the Week', 'total_bill': 'Total Bill'})
+
+# Show the plot
+fig.show()
+     
+Q3. Using the tips dataset in the Plotly library, Plot a histogram for x= "sex" and y="total_bill" column in the tips dataset. Also, use the "smoker" column with the pattern_shape parameter and the "day" column with the color parameter.
+
+
+import seaborn as sns
+import plotly.express as px
+
+# Step 1: Load the "tips" dataset from Seaborn
+tips_dataset = sns.load_dataset("tips")
+
+# Step 2: Create the histogram using Plotly Express
+fig = px.histogram(tips_dataset, x='sex', y='total_bill', color='day', barmode='group',
+                   histfunc='sum', pattern_shape='smoker', title='Histogram of Total Bill by Sex',
+                   labels={'sex': 'Sex', 'total_bill': 'Total Bill'})
+
+# Show the plot
+fig.show()
+     
+Q4. Using the iris dataset in the Plotly library, Plot a scatter matrix plot, using the "species" column for the color parameter. Note: Use "sepal_length", "sepal_width", "petal_length", "petal_width" columns only with the dimensions parameter.
+
+
+import plotly.express as px
+
+# Step 1: Load the "iris" dataset from Plotly Express (This dataset is built-in in Plotly Express)
+df = px.data.iris()
+
+# Step 2: Create the scatter matrix plot using Plotly Express
+fig = px.scatter_matrix(df, dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"],
+                        color="species", title="Scatter Matrix Plot of Iris Dataset")
+
+# Show the plot
+fig.show()
+     
+Q5. What is Distplot? Using Plotly express, plot a distplot.
+
+As of my last update in September 2021, Plotly Express does not have a direct equivalent of Seaborn's distplot. However, you can use Plotly Express to create a similar visualization of the distribution of a single numerical variable using a histogram and kernel density estimate (KDE) plot.
+
+
+import plotly.express as px
+
+# Step 1: Load or create your dataset (Here, we'll create a sample dataset for demonstration)
+import numpy as np
+np.random.seed(42)
+data = np.random.normal(loc=0, scale=1, size=1000)
+
+# Step 2: Create the KDE plot using Plotly Express
+fig = px.histogram(data, marginal="rug", nbins=30, opacity=0.7, title="KDE Plot using Plotly Express",
+                   labels={'value': 'Value'})
+
+# Show the plot
+fig.show()
+     
